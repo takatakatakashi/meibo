@@ -1,0 +1,38 @@
+.body
+  .top
+  %p#notice= notice
+  飲み会名簿！
+  %h1
+  = form_with url: users_path, method: :get, local: true do |f|
+    = f.label :名前検索
+    = f.text_field :search, class: 'form-control', placeholder: '名前検索'
+    = f.label :年齢検索
+    = f.number_field :min_age, class: 'form-control', placeholder: 'min. 年齢'
+    = f.number_field :max_age, class: 'form-control', placeholder: 'max. 年齢'
+    = f.label :部署検索
+    = f.text_field :department, class: 'form-control', placeholder: '部署検索'
+    = f.label :出欠検索
+    = f.text_field :attendance, class: 'form-control', placeholder: '出欠'
+    %br/
+    = f.submit '検索', class: 'btn btn-primary', name: nil, age: nil, department: nil
+  %table
+    %thead
+      %tr
+        %th 名前
+        %th 年齢
+        %th 部署
+        %th 出欠
+        %th{:colspan => "3"}
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.name
+          %td= user.age
+          %td= user.department
+          %td= user.attendance
+          %td= link_to '詳細', user
+          %td= link_to '修正', edit_user_path(user)
+          %td= link_to '削除', user, method: :delete, data: { confirm: '削除しますか?' }
+  %br/
+  = link_to '新規入力', new_user_path
+  %p= paginate @users

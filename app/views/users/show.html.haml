@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong 名前:
+  = @user.name
+%p
+  %strong 年齢:
+  = @user.age
+%p
+  %strong 部署:
+  = @user.department
+%p
+  %strong 出欠:
+  = @user.attendance
+= link_to '修正', edit_user_path(@user)
+|
+= link_to '戻る', users_path

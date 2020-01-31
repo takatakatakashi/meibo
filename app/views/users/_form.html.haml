@@ -1,0 +1,23 @@
+= form_with(model: user, local: true) do |form|
+  - if user.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - user.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :名前
+    = form.text_field :name
+  .field
+    = form.label :年齢
+    = form.number_field :age
+    .field
+    = form.label :部署
+    = form.text_field :department
+    .field
+    = form.label :出欠
+    = form.text_field :attendance
+  .actions
+    = form.submit '投稿'
