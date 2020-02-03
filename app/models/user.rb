@@ -9,8 +9,6 @@ end
 def self.search(params)
   results = all.order(created_at: :asc)
   results = results.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?
-  results = results.where('age >= ?', params[:min_age]) if params[:min_age].present?
-  results = results.where('age <= ?', params[:max_age]) if params[:max_age].present?
   results = results.where('department LIKE ?', "%#{params[:department]}%") if params[:department].present?
   results = results.where('attendance LIKE ?', "%#{params[:attendance]}%") if params[:attendance].present?
   results
